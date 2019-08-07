@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Chin Wag](https://up.htmlacademy.ru/ecmascript/9/user/829185).
-* Наставник: `Денис Быков`.
+* Наставник: [Денис Быков](https://htmlacademy.ru/profile/id66426).
 
 ---
 

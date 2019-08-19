@@ -4,6 +4,7 @@
   "private": true,
   "description": "Личный проект «Киноман» от HTML Academy",
   "scripts": {
+    "build": "webpack",
     "eslint": "eslint src/**/*.js",
     "test": "npm run eslint",
     "start": "webpack-dev-server --open"
@@ -16,5 +17,8 @@
   },
   "engines": {
     "node": "10"
+  },
+  "dependencies": {
+    "webpack-dev-server": "^3.8.0"
   }
 }

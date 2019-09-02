@@ -1,6 +1,6 @@
 import {getRandDesc, getRandInt, getRandDate, getRandArrElems} from "./utils";
 
-export const data = {
+const filmCard = {
   titles: [
     `Made for each other`,
     `Popeye meets sinbad`,
@@ -84,3 +84,32 @@ export const data = {
     return getRandDate();
   },
 };
+
+export const data = [filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard];
+
+const comment = {
+  names: [
+    `John Doe`,
+    `Tim Macoveev`,
+  ],
+  emojisSrcs: [
+    `smile.png`,
+    `sleeping.png`,
+    `puke.png`,
+    `angry.png`,
+  ],
+  get emojiSrc() {
+    return this.emojisSrcs[getRandInt(0, this.emojisSrcs.length - 1)];
+  },
+  get text() {
+    return getRandDesc(3);
+  },
+  get date() {
+    return getRandDate();
+  },
+  get name() {
+    return this.names[getRandInt(0, this.names.length - 1)];
+  },
+};
+
+export const comments = [comment, comment, comment, comment, comment];

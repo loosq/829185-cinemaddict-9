@@ -1,7 +1,6 @@
-import {getRandDesc, getRandInt} from "../utils";
 import moment from 'moment';
 
-export const createFilmDetailsTemplate = (filmCard) => {
+export const createFilmDetailsTemplate = (filmCard, comment) => {
   return `<section class="film-details">
   <form class="film-details__inner" action="" method="get">
     <div class="form-details__top-container">
@@ -42,7 +41,7 @@ export const createFilmDetailsTemplate = (filmCard) => {
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Release Date</td>
-              <td class="film-details__cell">${moment(filmCard.dateOforigin).format('D MMMM YYYY')}</td>
+              <td class="film-details__cell">${moment(filmCard.dateOforigin).format(`D MMMM YYYY`)}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Runtime</td>
@@ -81,63 +80,23 @@ export const createFilmDetailsTemplate = (filmCard) => {
 
     <div class="form-details__bottom-container">
       <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">4</span></h3>
-
+        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comment.length}</span></h3>
         <ul class="film-details__comments-list">
-          <li class="film-details__comment">
+        ${comment.map((i) =>
+    `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
-              <img src="./images/emoji/smile.png" width="55" height="55" alt="emoji">
+              <img src="./images/emoji/${i.emojiSrc}" width="55" height="55" alt="emoji">
             </span>
             <div>
-              <p class="film-details__comment-text">Interesting setting and a good cast</p>
+              <p class="film-details__comment-text">${i.text}</p>
               <p class="film-details__comment-info">
-                <span class="film-details__comment-author">Tim Macoveev</span>
-                <span class="film-details__comment-day">3 days ago</span>
+                <span class="film-details__comment-author">${i.name}</span>
+                <span class="film-details__comment-day">${moment(i.date).endOf(`day`).fromNow()}</span>
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/sleeping.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Booooooooooring</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/puke.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Very very old. Meh</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/angry.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Almost two hours? Seriously?</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">Today</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
+          </li>`)}
         </ul>
-
         <div class="film-details__new-comment">
           <div for="add-emoji" class="film-details__add-emoji-label"></div>
 

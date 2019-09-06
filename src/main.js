@@ -6,14 +6,16 @@ import {createFilmsContainer} from './components/films-container';
 import {createShowMoreBtn} from './components/show-more-btn';
 import {createFilmsExtraTemplate} from './components/films-extra';
 import {createFilmDetailsTemplate} from './components/film-details';
-import {data, comments} from "./data.js";
+import {data, comment} from "./data.js";
 import {getRandInt} from "./utils";
 
 const filmCards = data.slice(0, 5);
 const filmCardsMore = data.slice(0, 5);
 const filmCardsExtra = data.slice(0, 2);
 const filCardDetails = data[0];
-const commentsBlock = comments.slice(0, getRandInt(0, comments.length - 1));
+
+const MAX_COMMENTS = 6;
+export const commentsBlock = new Array(getRandInt(0, MAX_COMMENTS)).fill(``).map(comment);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);

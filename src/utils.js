@@ -11,7 +11,7 @@ export const getRandInt = (min, max) => Math.round(min - 0.5 + Math.random() * (
  *
  * @param {int} count минимальное число предложений.
  */
-export const getRandDesc = (count) => {
+export const getRandomDescscription = (count) => {
   const arr = [
     ` Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     ` Cras aliquet varius magna, non porta ligula feugiat eget.`,

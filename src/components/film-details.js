@@ -41,7 +41,7 @@ export const createFilmDetailsTemplate = (filmCard, comment) => {
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Release Date</td>
-              <td class="film-details__cell">${moment(filmCard.dateOforigin).format(`D MMMM YYYY`)}</td>
+              <td class="film-details__cell">${moment(filmCard.dateOfOrigin).format(`D MMMM YYYY`)}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Runtime</td>
@@ -85,7 +85,7 @@ export const createFilmDetailsTemplate = (filmCard, comment) => {
         ${comment.map((i) =>
     `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
-              <img src="./images/emoji/${i.emojiSrc}" width="55" height="55" alt="emoji">
+              <img src="./images/emoji/${i.emojisSrc}" width="55" height="55" alt="emoji">
             </span>
             <div>
               <p class="film-details__comment-text">${i.text}</p>
@@ -95,7 +95,7 @@ export const createFilmDetailsTemplate = (filmCard, comment) => {
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
-          </li>`)}
+          </li>`).join((``))}
         </ul>
         <div class="film-details__new-comment">
           <div for="add-emoji" class="film-details__add-emoji-label"></div>

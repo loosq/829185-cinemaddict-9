@@ -1,4 +1,4 @@
-import {getRandDesc, getRandInt, getRandDate, getRandArrElems} from "./utils";
+import {getRandomDescscription, getRandInt, getRandDate, getRandArrElems} from "./utils";
 
 const filmCard = {
   titles: [
@@ -69,10 +69,10 @@ const filmCard = {
     return getRandInt(0, 100);
   },
   get shortDesc() {
-    return getRandDesc(3);
+    return getRandomDescscription(3);
   },
   get longDesc() {
-    return getRandDesc(12);
+    return getRandomDescscription(12);
   },
   get year() {
     return getRandInt(0, 2019);
@@ -87,29 +87,17 @@ const filmCard = {
 
 export const data = [filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard];
 
-const comment = {
-  names: [
+export const comment = () => ({
+  name: [
     `John Doe`,
     `Tim Macoveev`,
-  ],
-  emojisSrcs: [
+  ][getRandInt(0, 1)],
+  emojisSrc: [
     `smile.png`,
     `sleeping.png`,
     `puke.png`,
     `angry.png`,
-  ],
-  get emojiSrc() {
-    return this.emojisSrcs[getRandInt(0, this.emojisSrcs.length - 1)];
-  },
-  get text() {
-    return getRandDesc(3);
-  },
-  get date() {
-    return getRandDate();
-  },
-  get name() {
-    return this.names[getRandInt(0, this.names.length - 1)];
-  },
-};
-
-export const comments = [comment, comment, comment, comment, comment];
+  ][getRandInt(0, 3)],
+  text: getRandomDescscription(3),
+  date: getRandDate()
+});

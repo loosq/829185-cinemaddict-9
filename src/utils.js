@@ -60,3 +60,48 @@ export const getRandArrElems = (count, arr) => {
 
   return arrCollect;
 };
+
+/* Вспомогательное перечисление
+*/
+export const Position = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
+/* Создаёт разметку
+*
+* @param {string} template разметка
+*/
+export const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+/* Отрисовывает разметку в родительском элементе
+*
+* @param {string} container родительский элемент
+* @param {string} element разметка
+* @param {string} place место отрисовки, AFTERBEGIN - вначале, BEFOREEND - вконце.
+*/
+export const render = (container, element, place) => {
+  switch (place) {
+    case Position.AFTERBEGIN:
+      container.prepend(element);
+      break;
+    case Position.BEFOREEND:
+      container.append(element);
+      break;
+  }
+};
+
+/* Удаляет разметку
+*
+* @param {string} template разметка
+*/
+export const unrender = (element) => {
+  if (element) {
+    element.remove();
+  }
+};

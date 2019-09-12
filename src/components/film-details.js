@@ -1,30 +1,25 @@
-import {createElement} from "../utils";
+import {createElement, getRandArrElems, getRandInt} from "../utils";
 import moment from 'moment';
 
 export class FilmsDetails {
-  constructor({title, raiting, duration, year, genre, imageSrc, shortDesc, comment, director, writer, actors, dateOforigin, country}) {
+  constructor({
+    title, names, raiting, duration, year, genre, imageSrc, shortDesc, dateOforigin,
+    country, comments, longDesc, emojiSrc,
+  }) {
     this._title = title;
+    this._names = names;
     this._raiting = raiting;
     this._duration = duration;
     this._year = year;
+    this._comments = comments;
     this._genre = genre;
     this._imageSrc = imageSrc;
     this._shortDesc = shortDesc;
-    this._director = director;
-    this._writer = writer;
-    this._actors = actors;
-    this._comments = comments;
+    this._emojiSrc = emojiSrc;
     this._dateOforigin = dateOforigin;
     this._country = country;
+    this._longDesc = longDesc;
     this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
   }
 
   getTemplate() {
@@ -56,15 +51,15 @@ export class FilmsDetails {
           <table class="film-details__table">
             <tr class="film-details__row">
               <td class="film-details__term">Director</td>
-              <td class="film-details__cell">${this._director}</td>
+              <td class="film-details__cell">${this._names[getRandInt(0, 5)]}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Writers</td>
-              <td class="film-details__cell">${this._writer}</td>
+              <td class="film-details__cell">${this._names[getRandInt(0, 5)]}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Actors</td>
-              <td class="film-details__cell">${this._actors}</td>
+              <td class="film-details__cell">${getRandArrElems(3, this._names)}</td>
             </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Release Date</td>
@@ -81,14 +76,14 @@ export class FilmsDetails {
             <tr class="film-details__row">
               <td class="film-details__term">Genres</td>
               <td class="film-details__cell">
-                <span class="film-details__genre">${filmCard.genre}</span>
-                <span class="film-details__genre">${filmCard.genre}</span>
-                <span class="film-details__genre">${filmCard.genre}</span></td>
+                <span class="film-details__genre">${this._genre}</span>
+                <span class="film-details__genre">${this._genre}</span>
+                <span class="film-details__genre">${this._genre}</span></td>
             </tr>
           </table>
 
           <p class="film-details__film-description">
-          ${filmCard.longDesc}
+          ${this._longDesc}
           </p>
         </div>
       </div>
@@ -107,10 +102,10 @@ export class FilmsDetails {
 
     <div class="form-details__bottom-container">
       <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comment.length}</span></h3>
+        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments}</span></h3>
         <ul class="film-details__comments-list">
-        ${comment.map((i) =>
-      `<li class="film-details__comment">
+        ${this._comment.map((i) =>
+    `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/${i.emojiSrc}" width="55" height="55" alt="emoji">
             </span>
@@ -157,4 +152,13 @@ export class FilmsDetails {
     </div>
   </form>
 </section>`;
-  };
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+}

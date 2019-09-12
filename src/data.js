@@ -1,38 +1,38 @@
-import {getRandomDescscription, getRandInt, getRandDate, getRandArrElems} from "./utils";
+import { getRandomDescscription, getRandInt, getRandDate } from "./utils";
 
-const filmCard = {
-  titles: [
+export const data = () => ({
+  title: [
     `Made for each other`,
     `Popeye meets sinbad`,
     `Sagebrush trail`,
     `Santa claus conquers the martians`,
     `The dance of life`,
     `The great flamarion`,
-    `The man with the golden arm`],
-  imgs: [
+    `The man with the golden arm`][getRandInt(0, 6)],
+  imageSrc: [
     `made-for-each-other.png`,
     `popeye-meets-sinbad.png`,
     `sagebrush-trail.jpg`,
     `santa-claus-conquers-the-martians.jpg`,
     `the-dance-of-life.jpg`,
     `the-great-flamarion.jpg`,
-    `the-man-with-the-golden-arm.jpg`],
-  genres: [
+    `the-man-with-the-golden-arm.jpg`][getRandInt(0, 6)],
+  genre: [
     `Western`,
     `Soap`,
     `Block-buster`,
     `Dramma`,
     `Si-Fi`,
     `Commedy`,
-    `Thriller`],
-  countries: [
+    `Thriller`][getRandInt(0, 6)],
+  country: [
     `USA`,
     `USSR`,
     `Canada`,
     `UK`,
     `Denmark`,
     `UAR`,
-    `Israel`],
+    `Israel`][getRandInt(0, 6)],
   names: [
     ` Anne Wigton`,
     ` Heinz Herald`,
@@ -41,63 +41,26 @@ const filmCard = {
     ` Dan Duryea`,
     ` Anthony Mann`,
   ],
-  get director() {
-    return getRandArrElems(1, this.names);
-  },
-  get writer() {
-    return getRandArrElems(1, this.names);
-  },
-  get actors() {
-    return getRandArrElems(3, this.names);
-  },
-  get country() {
-    return this.countries[getRandInt(0, this.countries.length - 1)];
-  },
-  get title() {
-    return this.titles[getRandInt(0, this.titles.length - 1)];
-  },
-  get imageSrc() {
-    return this.imgs[getRandInt(0, this.imgs.length - 1)];
-  },
-  get genre() {
-    return this.genres[getRandInt(0, this.genres.length - 1)];
-  },
-  get raiting() {
-    return getRandInt(0, 9) + `.` + getRandInt(0, 9);
-  },
-  get comments() {
-    return getRandInt(0, 100);
-  },
-  get shortDesc() {
-    return getRandomDescscription(3);
-  },
-  get longDesc() {
-    return getRandomDescscription(12);
-  },
-  get year() {
-    return getRandInt(0, 2019);
-  },
-  get duration() {
-    return getRandInt(0, 130);
-  },
-  get dateOforigin() {
-    return getRandDate();
-  },
-};
-
-export const data = [filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard, filmCard];
-
-export const comment = () => ({
-  name: [
-    `John Doe`,
-    `Tim Macoveev`,
-  ][getRandInt(0, 1)],
+  raiting: getRandInt(0, 9) + `.` + getRandInt(0, 9),
+  comments: getRandInt(0, 100),
+  shortDesc: getRandomDescscription(3),
+  longDesc: getRandomDescscription(12),
+  year: getRandInt(0, 2019),
+  duration: getRandInt(0, 130),
+  dateOforigin: getRandDate(),
   emojisSrc: [
     `smile.png`,
     `sleeping.png`,
     `puke.png`,
     `angry.png`,
   ][getRandInt(0, 3)],
+});
+
+export const comment = () => ({
+  name: [
+    `John Doe`,
+    `Tim Macoveev`,
+  ][getRandInt(0, 1)],
   text: getRandomDescscription(3),
-  date: getRandDate()
+  date: getRandDate(),
 });

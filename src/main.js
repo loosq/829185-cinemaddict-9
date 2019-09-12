@@ -1,66 +1,79 @@
-import {createSearchTemplate} from './components/search';
-import {createUserTemplate} from './components/user';
-import {createInfoTemplate} from './components/info';
-import {createFilmCardTemplate} from './components/film-card';
-import {createFilmsContainer} from './components/films-container';
-import {createShowMoreBtn} from './components/show-more-btn';
-import {createFilmsExtraTemplate} from './components/films-extra';
-import {createFilmDetailsTemplate} from './components/film-details';
+import {Search} from './components/search';
+import {User} from './components/user';
+import {Info} from './components/info';
+import {FilmCard} from './components/film-card';
+import {FilmsContainer} from './components/films-container';
+import {ShowMoreBtn} from './components/show-more-btn';
+import {FilmsExtra} from './components/films-extra';
+import {FilmsDetails} from "./components/film-details";
 import {data, comment} from "./data.js";
-import {getRandInt} from "./utils";
+import {Position, render} from "./utils";
 
-const filmCards = data.slice(0, 5);
-const filmCardsMore = data.slice(0, 5);
-const filmCardsExtra = data.slice(0, 2);
-const filCardDetails = data[0];
+const FILMS_COUNT = 5;
+let Mocks = new Array(FILMS_COUNT)
+  .fill(``)
+  .map(data);
 
-const MAX_COMMENTS = 6;
-export const commentsBlock = new Array(getRandInt(0, MAX_COMMENTS)).fill(``).map(comment);
+const EXTRA_FILMS_COUNT = 2;
+let ExtraMocks = new Array(EXTRA_FILMS_COUNT)
+  .fill(``)
+  .map(data);
 
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
+const FILM_DETAILS_COUNT = 1;
+let DetailsMocks = new Array(FILM_DETAILS_COUNT)
+  .fill(``)
+  .map(data);
 
+const bodyElement = document.querySelector(`body`);
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
-render(siteMainElement, createFilmsContainer(), `beforeend`);
+const filmsContainer = new FilmsContainer();
+render(siteMainElement, filmsContainer.getElement(), `beforeend`);
 
 const siteFilmsElement = document.querySelector(`.films`);
 const siteFilmsListElement = siteFilmsElement.querySelector(`.films-list`);
 const siteFilmsElementContainer = siteFilmsListElement.querySelector(`.films-list__container`);
 
-render(siteHeaderElement, createUserTemplate(), `beforeend`);
-render(siteHeaderElement, createSearchTemplate(), `beforeend`);
-render(siteMainElement, createInfoTemplate(), `afterbegin`);
+const user = new User();
+render(siteHeaderElement, user.getElement(), Position.BEFOREEND);
 
-filmCards.map((i) => render(siteFilmsElementContainer, createFilmCardTemplate(i), `afterbegin`));
+const search = new Search();
+render(siteHeaderElement, search.getElement(), Position.BEFOREEND);
 
-render(siteFilmsListElement, createShowMoreBtn(), `beforeend`);
+const info = new Info();
+render(siteMainElement, info.getElement(), Position.AFTERBEGIN);
 
-render(siteFilmsElement, createFilmsExtraTemplate(`Top rated`), `beforeend`);
-render(siteFilmsElement, createFilmsExtraTemplate(`Most commented`), `beforeend`);
+const renderFilmCards = (mocks, place = siteFilmsElementContainer, position = Position.AFTERBEGIN) => {
+  const renderFilmCard = new FilmCard(mocks);
+  render(place, renderFilmCard.getElement(), position);
+};
 
-const siteFilmsExtraElements = document.querySelectorAll(`.films-list--extra .films-list__container`);
-for (let z = 0; z <= siteFilmsExtraElements.length - 1; z++) {
-  filmCardsExtra.map((i) => render(siteFilmsExtraElements[z], createFilmCardTemplate(i), `afterbegin`));
+Mocks.forEach((Mocks) => renderFilmCards(Mocks));
+
+const showMoreBtn = new ShowMoreBtn();
+render(siteFilmsListElement, showMoreBtn.getElement(), Position.BEFOREEND);
+const showMore = siteFilmsListElement.querySelector(`.films-list__show-more`);
+
+const showMoreMocks = () => {
+  Mocks.forEach((Mocks) => renderFilmCards(Mocks));
+  showMore.removeEventListener(`click`, showMoreMocks);
+  showMore.remove();
+};
+
+showMore.addEventListener(`click`, showMoreMocks);
+
+const filmsExtraTopRated = new FilmsExtra(`Top rated`);
+const filmsExtraMostCommented = new FilmsExtra(`Most commented`);
+render(siteFilmsElement, filmsExtraTopRated.getElement(), Position.BEFOREEND);
+render(siteFilmsElement, filmsExtraMostCommented.getElement(), Position.BEFOREEND);
+
+const extraFilmsContainer = document.querySelectorAll(`.films-list--extra .films-list__container`);
+
+for (let key of extraFilmsContainer) {
+  ExtraMocks.forEach((ExtraMocks) => renderFilmCards(ExtraMocks, key));
 }
-const footer = document.querySelector(`.footer`);
 
-render(footer, createFilmDetailsTemplate(filCardDetails, commentsBlock), `afterend`);
-
-const showMoreBtn = document.querySelector(`.films-list__show-more`);
-const showMore = () => {
-  filmCardsMore.map((i) => render(siteFilmsElementContainer, createFilmCardTemplate(i), `afterbegin`));
-  showMoreBtn.removeEventListener(`click`, showMore);
-  showMoreBtn.remove();
-};
-showMoreBtn.addEventListener(`click`, showMore);
-
-const closeDetailsBtn = document.querySelector(`.film-details__close-btn`);
-const removeFilmDetails = () => {
-  const filmDetails = document.querySelector(`.film-details`);
-  filmDetails.remove();
-  closeDetailsBtn.removeEventListener(`click`, removeFilmDetails);
-};
-closeDetailsBtn.addEventListener(`click`, removeFilmDetails);
+const filmDetails = new FilmsDetails(DetailsMocks, comment);
+debugger
+render(bodyElement, filmDetails.getElement(), Position.BEFOREEND);

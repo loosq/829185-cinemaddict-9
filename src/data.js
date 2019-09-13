@@ -24,7 +24,7 @@ export const data = () => ({
     `Dramma`,
     `Si-Fi`,
     `Commedy`,
-    `Thriller`][getRandInt(0, 6)],
+    `Thriller`],
   country: [
     `USA`,
     `USSR`,
@@ -48,12 +48,6 @@ export const data = () => ({
   year: getRandInt(0, 2019),
   duration: getRandInt(0, 130),
   dateOforigin: getRandDate(),
-  emojisSrc: [
-    `smile.png`,
-    `sleeping.png`,
-    `puke.png`,
-    `angry.png`,
-  ][getRandInt(0, 3)],
 });
 
 export const comment = () => ({
@@ -63,4 +57,10 @@ export const comment = () => ({
   ][getRandInt(0, 1)],
   text: getRandomDescscription(3),
   date: getRandDate(),
+  emojisSrc: [
+    `smile.png`,
+    `sleeping.png`,
+    `puke.png`,
+    `angry.png`,
+  ][getRandInt(0, 3)],
 });

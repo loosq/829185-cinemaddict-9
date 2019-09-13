@@ -3,19 +3,15 @@ import moment from 'moment';
 
 export class FilmsDetails {
   constructor({
-    title, names, raiting, duration, year, genre, imageSrc, shortDesc, dateOforigin,
-    country, comments, longDesc, emojiSrc,
+    title, names, raiting, duration, genre, imageSrc, dateOforigin,
+    country, longDesc,
   }) {
     this._title = title;
     this._names = names;
     this._raiting = raiting;
     this._duration = duration;
-    this._year = year;
-    this._comments = comments;
     this._genre = genre;
     this._imageSrc = imageSrc;
-    this._shortDesc = shortDesc;
-    this._emojiSrc = emojiSrc;
     this._dateOforigin = dateOforigin;
     this._country = country;
     this._longDesc = longDesc;
@@ -23,9 +19,7 @@ export class FilmsDetails {
   }
 
   getTemplate() {
-    return `<section class="film-details">
-  <form class="film-details__inner" action="" method="get">
-    <div class="form-details__top-container">
+    return `<div class="form-details__top-container">
       <div class="film-details__close">
         <button class="film-details__close-btn" type="button">close</button>
       </div>
@@ -76,9 +70,9 @@ export class FilmsDetails {
             <tr class="film-details__row">
               <td class="film-details__term">Genres</td>
               <td class="film-details__cell">
-                <span class="film-details__genre">${this._genre}</span>
-                <span class="film-details__genre">${this._genre}</span>
-                <span class="film-details__genre">${this._genre}</span></td>
+                <span class="film-details__genre">${this._genre[getRandInt(0, 6)]}</span>
+                <span class="film-details__genre">${this._genre[getRandInt(0, 6)]}</span>
+                <span class="film-details__genre">${this._genre[getRandInt(0, 6)]}</span></td>
             </tr>
           </table>
 
@@ -98,60 +92,7 @@ export class FilmsDetails {
         <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
         <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
       </section>
-    </div>
-
-    <div class="form-details__bottom-container">
-      <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments}</span></h3>
-        <ul class="film-details__comments-list">
-        ${this._comment.map((i) =>
-    `<li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/${i.emojiSrc}" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">${i.text}</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${i.name}</span>
-                <span class="film-details__comment-day">${moment(i.date).endOf(`day`).fromNow()}</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>`)}
-        </ul>
-        <div class="film-details__new-comment">
-          <div for="add-emoji" class="film-details__add-emoji-label"></div>
-
-          <label class="film-details__comment-label">
-            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-          </label>
-
-          <div class="film-details__emoji-list">
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="sleeping">
-            <label class="film-details__emoji-label" for="emoji-smile">
-              <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="neutral-face">
-            <label class="film-details__emoji-label" for="emoji-sleeping">
-              <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-gpuke" value="grinning">
-            <label class="film-details__emoji-label" for="emoji-gpuke">
-              <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="grinning">
-            <label class="film-details__emoji-label" for="emoji-angry">
-              <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
-            </label>
-          </div>
-        </div>
-      </section>
-    </div>
-  </form>
-</section>`;
+    </div>`;
   }
 
   getElement() {
@@ -160,5 +101,11 @@ export class FilmsDetails {
     }
 
     return this._element;
+  }
+
+  removeElement() {
+    if (this._element) {
+      this._element = null;
+    }
   }
 }

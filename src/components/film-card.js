@@ -40,4 +40,10 @@ export class FilmCard {
 
     return this._element;
   }
+
+  removeElement() {
+    if (this._element) {
+      this._element = null;
+    }
+  }
 }

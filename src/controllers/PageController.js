@@ -5,6 +5,8 @@ import {FilmsDetails} from "../components/film-details";
 import {CommentsContainer} from "../components/comments-container";
 import {Comment} from "../components/comment";
 import {FilmsContainer} from "../components/films-container";
+import {Sort} from "../components/sort";
+import {Info} from "../components/info";
 
 export class PageController {
   constructor(container, filmMocks, commentMocks) {
@@ -12,10 +14,15 @@ export class PageController {
     this._someMocks = filmMocks;
     this._commentMocks = commentMocks;
     this._filmsContainer = new FilmsContainer();
+    this._mainNav = new Info();
+    this._sorting = new Sort();
   }
 
   init() {
     render(this._container, this._filmsContainer.getElement(), Position.BEFOREEND);
+    render(this._container, this._sorting.getElement(), Position.AFTERBEGIN);
+    render(this._container, this._mainNav.getElement(), Position.AFTERBEGIN);
+    this._sorting.getElement().addEventListener(`click`, (evt) => this._onSortLinkClick(evt));
 
     this._someMocks.forEach((mocks, commentMocks) => this._renderFilmCards(mocks, commentMocks));
   }
@@ -37,7 +44,7 @@ export class PageController {
         render(filmDetailsInnerElement, filmDetailsComponent.getElement(), Position.AFTERBEGIN);
         render(filmDetailsInnerElement, commentsContainerComponent.getElement(), Position.BEFOREEND);
         render(commentsContainerComponent.getElement()
-            .querySelector(`.film-details__comments-list`), commentBlock.getElement(), Position.BEFOREEND);
+          .querySelector(`.film-details__comments-list`), commentBlock.getElement(), Position.BEFOREEND);
 
 
         const onEscKeyDown = (evt) => {
@@ -73,5 +80,33 @@ export class PageController {
       });
 
     render(this._filmsContainer.getElement(), filmCardComponent.getElement(), Position.BEFOREEND);
+  }
+
+  _onSortLinkClick(evt) {
+    evt.preventDefault();
+    if (evt.target.tagName !== `A`) {
+      return;
+    }
+    const sortList = this._sorting.getElement().querySelectorAll(`.sort__button`);
+    sortList.forEach((sortItem) => sortItem.classList.remove(`sort__button--active`));
+    if (!evt.target.classList.contains(`sort__button--active`)) {
+      evt.target.classList.add(`sort__button--active`);
+    }
+
+    this._filmsContainer.getElement().innerHTML = ``;
+
+    switch (evt.target.dataset.sortType) {
+      case `date-up`:
+        const sortedByDateUp = this._someMocks.slice().sort((a, b) => b.dateOforigin - a.dateOforigin);
+        sortedByDateUp.forEach((mocks, commentMocks) => this._renderFilmCards(mocks, commentMocks));
+        break;
+      case `raiting-up`:
+        const sortedByRaiting = this._someMocks.slice().sort((a, b) => b.raiting - a.raiting);
+        sortedByRaiting.forEach((mocks, commentMocks) => this._renderFilmCards(mocks, commentMocks));
+        break;
+      case `default`:
+        this._someMocks.forEach((mocks, commentMocks) => this._renderFilmCards(mocks, commentMocks));
+        break;
+    }
   }
 }

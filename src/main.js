@@ -45,9 +45,6 @@ render(siteHeaderElement, user.getElement(), Position.BEFOREEND);
 const search = new Search();
 render(siteHeaderElement, search.getElement(), Position.BEFOREEND);
 
-const info = new Info();
-render(siteMainElement, info.getElement(), Position.AFTERBEGIN);
-
 const pageControlle = new PageController(siteMainElement, Mocks, CommentMocks);
 pageControlle.init();
 //

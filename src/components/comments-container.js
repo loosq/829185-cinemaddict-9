@@ -1,6 +1,6 @@
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class CommentsContainer extends AbstractClass {
+export class CommentsContainer extends AbstractComponent {
   constructor(commentsCount) {
     super();
     this._commentsCount = commentsCount;

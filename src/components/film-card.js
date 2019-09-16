@@ -1,6 +1,6 @@
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class FilmCard extends AbstractClass {
+export class FilmCard extends AbstractComponent {
   constructor({title, raiting, duration, year, genre, imageSrc, shortDesc, comments}) {
     super();
     this._title = title;

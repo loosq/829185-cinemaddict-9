@@ -1,6 +1,6 @@
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class FilmsExtra extends AbstractClass {
+export class FilmsExtra extends AbstractComponent {
   constructor(header) {
     super();
     this._header = header;

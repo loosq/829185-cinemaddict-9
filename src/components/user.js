@@ -1,6 +1,6 @@
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class User extends AbstractClass {
+export class User extends AbstractComponent {
 
   getTemplate() {
     return `<form class="header__search search">

@@ -64,27 +64,3 @@ export const comment = () => ({
     `angry.png`,
   ][getRandInt(0, 3)],
 });
-
-export class AbstractClass {
-  constructor() {
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
-  }
-
-  getTemplate() {
-    throw Error(`This method can not be realised`);
-  }
-}

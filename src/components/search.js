@@ -1,6 +1,6 @@
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class Search extends AbstractClass {
+export class Search extends AbstractComponent {
 
   getTemplate() {
     return `<section class="header__profile profile">

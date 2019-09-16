@@ -1,7 +1,7 @@
 import moment from 'moment';
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class Comment extends AbstractClass {
+export class Comment extends AbstractComponent {
   constructor({name, text, date, emojiSrc}) {
     super();
     this._name = name;

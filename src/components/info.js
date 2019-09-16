@@ -1,7 +1,7 @@
 import {getRandInt} from "../utils";
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class Info extends AbstractClass {
+export class Info extends AbstractComponent {
 
   getTemplate() {
     return `<nav class="main-navigation">

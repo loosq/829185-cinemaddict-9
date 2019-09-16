@@ -1,8 +1,8 @@
 import {getRandArrElems, getRandInt} from "../utils";
 import moment from 'moment';
-import {AbstractClass} from "../data";
+import {AbstractComponent} from "./AbstractComponent";
 
-export class FilmsDetails extends AbstractClass {
+export class FilmsDetails extends AbstractComponent {
   constructor({title, names, raiting, duration, genre, imageSrc, dateOforigin, country, longDesc}) {
     super();
     this._title = title;

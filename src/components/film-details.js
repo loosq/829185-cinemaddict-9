@@ -1,11 +1,10 @@
-import {createElement, getRandArrElems, getRandInt} from "../utils";
+import {getRandArrElems, getRandInt} from "../utils";
 import moment from 'moment';
+import {AbstractClass} from "../data";
 
-export class FilmsDetails {
-  constructor({
-    title, names, raiting, duration, genre, imageSrc, dateOforigin,
-    country, longDesc,
-  }) {
+export class FilmsDetails extends AbstractClass {
+  constructor({title, names, raiting, duration, genre, imageSrc, dateOforigin, country, longDesc}) {
+    super();
     this._title = title;
     this._names = names;
     this._raiting = raiting;
@@ -15,7 +14,6 @@ export class FilmsDetails {
     this._dateOforigin = dateOforigin;
     this._country = country;
     this._longDesc = longDesc;
-    this._element = null;
   }
 
   getTemplate() {
@@ -93,19 +91,5 @@ export class FilmsDetails {
         <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
       </section>
     </div>`;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
   }
 }

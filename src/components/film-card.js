@@ -1,7 +1,8 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class FilmCard {
+export class FilmCard extends AbstractClass {
   constructor({title, raiting, duration, year, genre, imageSrc, shortDesc, comments}) {
+    super();
     this._title = title;
     this._raiting = raiting;
     this._duration = duration;
@@ -10,7 +11,6 @@ export class FilmCard {
     this._imageSrc = imageSrc;
     this._shortDesc = shortDesc;
     this._comments = comments;
-    this._element = null;
   }
 
   getTemplate() {
@@ -31,19 +31,5 @@ export class FilmCard {
             <button class="film-card__controls-item button film-card__controls-item--favorite">Mark as favorite</button>
           </form>
         </article>`;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
   }
 }

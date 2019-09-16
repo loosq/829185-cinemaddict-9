@@ -1,4 +1,4 @@
-import { getRandomDescscription, getRandInt, getRandDate } from "./utils";
+import {getRandomDescscription, getRandInt, getRandDate, createElement} from "./utils";
 
 export const data = () => ({
   title: [
@@ -57,10 +57,34 @@ export const comment = () => ({
   ][getRandInt(0, 1)],
   text: getRandomDescscription(3),
   date: getRandDate(),
-  emojisSrc: [
+  emojiSrc: [
     `smile.png`,
     `sleeping.png`,
     `puke.png`,
     `angry.png`,
   ][getRandInt(0, 3)],
 });
+
+export class AbstractClass {
+  constructor() {
+    this._element = null;
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    if (this._element) {
+      this._element = null;
+    }
+  }
+
+  getTemplate() {
+    throw Error(`This method can not be realised`);
+  }
+}

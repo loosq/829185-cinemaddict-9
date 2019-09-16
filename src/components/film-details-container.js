@@ -1,28 +1,11 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class FilmsDetailsContainer {
-  constructor() {
-    this._element = null;
-  }
+export class FilmsDetailsContainer extends AbstractClass {
 
   getTemplate() {
     return `<section class="film-details">
   <form class="film-details__inner" action="" method="get">
   </form>
 </section>`;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
   }
 }

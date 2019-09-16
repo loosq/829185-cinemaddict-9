@@ -1,17 +1,7 @@
-import {createElement, getRandInt} from "../utils";
+import {getRandInt} from "../utils";
+import {AbstractClass} from "../data";
 
-export class Info {
-  constructor() {
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
+export class Info extends AbstractClass {
 
   getTemplate() {
     return `<nav class="main-navigation">

@@ -1,17 +1,9 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class FilmsExtra {
+export class FilmsExtra extends AbstractClass {
   constructor(header) {
+    super();
     this._header = header;
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
   }
 
   getTemplate() {

@@ -1,17 +1,6 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class FilmsContainer {
-  constructor() {
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
+export class FilmsContainer extends AbstractClass {
 
   getTemplate() {
     return `<section class="films">

@@ -1,17 +1,6 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class User {
-  constructor() {
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
+export class User extends AbstractClass {
 
   getTemplate() {
     return `<form class="header__search search">

@@ -1,9 +1,9 @@
-import {createElement} from "../utils";
+import {AbstractClass} from "../data";
 
-export class CommentsContainer {
+export class CommentsContainer extends AbstractClass {
   constructor(commentsCount) {
+    super();
     this._commentsCount = commentsCount;
-    this._element = null;
   }
 
   getTemplate() {
@@ -44,19 +44,5 @@ export class CommentsContainer {
         </div>
       </section>
     </div>`;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
   }
 }

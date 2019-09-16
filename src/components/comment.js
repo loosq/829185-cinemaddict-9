@@ -1,13 +1,13 @@
-import {createElement} from "../utils";
 import moment from 'moment';
+import {AbstractClass} from "../data";
 
-export class Comment {
-  constructor({name, text, date, emojisSrc}) {
+export class Comment extends AbstractClass {
+  constructor({name, text, date, emojiSrc}) {
+    super();
     this._name = name;
     this._text = text;
     this._date = date;
-    this._emojiSrc = emojisSrc;
-    this._element = null;
+    this._emojiSrc = emojiSrc;
   }
 
   getTemplate() {
@@ -24,19 +24,5 @@ export class Comment {
               </p>
             </div>
           </li>`;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    if (this._element) {
-      this._element = null;
-    }
   }
 }

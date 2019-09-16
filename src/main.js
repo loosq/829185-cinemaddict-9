@@ -10,9 +10,9 @@ import {FilmsDetails} from "./components/film-details";
 import {CommentsContainer} from './components/comments-container';
 import {Comment} from './components/comment';
 import {data, comment} from "./data.js";
-import {getRandInt, Position, render} from "./utils";
+import {Position, render} from "./utils";
 
-const COMMENTS_COUNT = getRandInt(0, 5);
+const COMMENTS_COUNT = 3
 let CommentMocks = new Array(COMMENTS_COUNT)
   .fill(``)
   .map(comment);
